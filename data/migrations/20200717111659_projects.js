@@ -17,7 +17,7 @@ exports.up = function (knex) {
         .integer("project_id")
         .unsigned()
         .notNullable()
-        .references("project.id");
+        .references("projects.id");
 
       tbl
         .integer("resource_id")
@@ -36,7 +36,7 @@ exports.up = function (knex) {
         .integer("project_id")
         .unsigned()
         .notNullable()
-        .references("project.id");
+        .references("projects.id");
     });
 };
 
