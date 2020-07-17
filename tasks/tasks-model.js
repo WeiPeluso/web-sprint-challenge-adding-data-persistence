@@ -5,6 +5,7 @@ module.exports = {
   find,
   add,
   findById,
+  findByProjectId,
 };
 
 function find() {
@@ -15,6 +16,13 @@ function find() {
 
 function findById(id) {
   return db("tasks").where({ id }).first();
+}
+
+function findByProjectId(id) {
+  return db("projects")
+    .join("tasks", "projects.id", "tasks.project_id")
+    .select("projects.name", "projects.description", "tasks.*")
+    .where("projects.id", "=", id);
 }
 
 function add(task) {

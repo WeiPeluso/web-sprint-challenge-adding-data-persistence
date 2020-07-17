@@ -13,6 +13,23 @@ router.get("/", (req, res) => {
       res.status(500).json({ err: err, message: "Failed to get tasks" });
     });
 });
+router.get("/project/:id", (req, res) => {
+  const { id } = req.params;
+
+  Tasks.findByProjectId(id)
+    .then((steps) => {
+      if (steps.length) {
+        res.json(steps);
+      } else {
+        res
+          .status(404)
+          .json({ message: "Could not find tasks for given project" });
+      }
+    })
+    .catch((err) => {
+      res.status(500).json({ err: err, message: "Failed to get tasks" });
+    });
+});
 
 router.post("/", (req, res) => {
   const taskData = req.body;
